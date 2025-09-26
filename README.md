@@ -3,6 +3,18 @@
 > Proyecto para diseñar e implementar una API REST que gestione **reservas de mesas** por **fecha** y **turno** (Almuerzo/Cena), validando disponibilidad y capacidad.
 
 - **Estado del proyecto:** Entrega 1 (diseño, sin código de backend)
+Tutor GT03:
+Ing. Francisco Javier Morales Ayala
+
+Integrantes
+
+- Emerson Arístides Alam Álvarez Figueroa AF97011 
+- Héctor Danilo Benítez Ortéz BO16004
+- Samuel Timoteo Cortez Hernández CH21024
+- Rodrigo Ernesto García Portillo GP24005
+- Marlon Alexis Núñez Ramos NR24002
+- Jonás Eduardo Villalobos Moran VM24042
+
 
 ---
 
@@ -93,7 +105,7 @@ class Reserva {
   LocalDateTime updatedAt
 }
 
-Reserva "1" *-- "1" Cliente : cliente
+Reserva "n" *-- "1" Cliente : cliente
 Reserva "1" *-- "1" Mesa : mesa
 Reserva "1" *-- "1" Turno : turno
 
