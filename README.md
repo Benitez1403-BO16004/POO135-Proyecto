@@ -1,6 +1,6 @@
 # API de Reservas de Restaurante — POO135 · Ciclo II/2025
 
-> Proyecto para diseñar e implementar una API REST que gestione **reservas de mesas** por **fecha** y **turno** (Almuerzo/Cena), validando disponibilidad y capacidad.
+> Proyecto para diseñar e implementar una API REST que gestione **reservas de mesas** por **fecha** y **turno** (turnos por hora), validando disponibilidad y capacidad.
 
 - **Estado del proyecto:** Entrega 1 (diseño, sin código de backend)
 Tutor GT03:
@@ -154,11 +154,11 @@ CREATE UNIQUE INDEX ux_reserva_activa
 
 ### Casos de Aplicación (CA)
 
-- **CA-01:** Dado una mesa de capacidad 4 y un turno Cena el 2025-10-01 sin reservas, cuando creo una reserva por 4 comensales para esa mesa, fecha y turno, entonces la reserva se crea en `CREATED`.
-- **CA-02:** Dado una reserva activa existente para Mesa M-01, 2025-10-01, Turno Cena, cuando intento crear otra para los mismos (mesa, fecha, turno), entonces recibo **409 Conflict** y no se crea una segunda reserva.
+- **CA-01:** Dado una mesa de capacidad 4 y un turno 8:00 - 8:59 el 2025-10-01 sin reservas, cuando creo una reserva por 4 comensales para esa mesa, fecha y turno, entonces la reserva se crea en `CREATED`.
+- **CA-02:** Dado una reserva activa existente para Mesa M-01, 2025-10-01, Turno 9:00 - 9:59 , cuando intento crear otra para los mismos (mesa, fecha, turno), entonces recibo **409 Conflict** y no se crea una segunda reserva.
 - **CA-03:** Dado una mesa de capacidad 2, cuando intento reservar 3 comensales, entonces recibo **400 Bad Request** por capacidad excedida.
 - **CA-04:** Dado la fecha de ayer, cuando intento reservar para ayer, entonces recibo **400 Bad Request** por fecha en el pasado.
-- **CA-05:** Dado fecha 2025-10-01 y turno Cena, cuando consulto disponibilidad, entonces veo **todas las mesas sin reserva activa** para ese (fecha, turno).
+- **CA-05:** Dado fecha 2025-10-01 y turno 11:00 - 11:59, cuando consulto disponibilidad, entonces veo **todas las mesas sin reserva activa** para ese (fecha, turno).
 
 ---
 
