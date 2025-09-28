@@ -248,16 +248,35 @@ CREATE UNIQUE INDEX ux_reserva_activa
 ### Casos de Aplicación (CA)
 
 - **CA-01:** Dado una mesa de capacidad 4 y un turno 8:00 - 8:59 el 2025-10-01 sin reservas, cuando creo una reserva por 4 comensales para esa mesa, fecha y turno, entonces la reserva se crea en `CREATED`.
-- **CA-02:** Dado una reserva activa existente para Mesa M-01, 2025-10-01, Turno 9:00 - 9:59 , cuando intento crear otra para los mismos (mesa, fecha, turno), entonces recibo **409 Conflict** y no se crea una segunda reserva.
+- **CA-02:** Dado una reserva activa existente para la mesa con `Mesa M-01`, 2025-10-01, Turno 9:00 - 9:59 , cuando intento crear otra para los mismos (mesa, fecha, turno), entonces recibo **409 Conflict** y no se crea una segunda reserva.
 - **CA-03:** Dado una mesa de capacidad 2, cuando intento reservar 3 comensales, entonces recibo **400 Bad Request** por capacidad excedida.
 - **CA-04:** Dado la fecha de ayer, cuando intento reservar para ayer, entonces recibo **400 Bad Request** por fecha en el pasado.
 - **CA-05:** Dado fecha 2025-10-01 y turno 11:00 - 11:59, cuando consulto disponibilidad, entonces veo **todas las mesas sin reserva activa** para ese (fecha, turno).
-- **CA-06:** Dado que ClienteID = 9999, MesaID = 9999 o TurnoID = 9999 no existen, cuando intento crear una reserva, recibo **404 Not Found** detallando la entidad y la reserva no se crea.
-- **CA-07:** Dada una reserva existente con estado CREATED, al realizar una solicitud para confirmarla (CONFIRMED) o cancelarla (CANCELLED) su estado cambia al estado solicitado (CONFIRMED/CANCELLED)
-- **CA-08:** Dada una reserva en estado CANCELLED, al intentar confirmarla (Actualizarla a CONFIRMED),  entonces recibo **400 Bad Request** o **422 Unprocessable Entity**
-- **CA-09:** Dada una reserva CONFIRMED para la mesa con ID 05, Turno 9:00 - 9:59, Fecha 2025-11-15, al reprogramar para Turno 8:00 - 8:59, Fecha 2025-11-15 (Con Turno disponible = True), la reserva se actualiza correctamente.
-- **CA-10:** Dada una reserva CONFIRMED para la mesa con ID 27, Turno 11:00 - 11:59, Fecha 2025-11-15, al reprogramar otra reserva (O a si misma) para los mismos valores, entonces recibo **409 Conclict** y la reprogramacion no se realiza. 
-
+- **CA-06:** Dado que `clienteId = 9999`, `mesaId = 9999` o `turnoId = 9999` no existen, cuando intento crear una reserva, recibo **404 Not Found** detallando la entidad y la reserva no se crea.
+- **CA-07:** Dada una reserva existente con estado `CREATED`, al realizar una solicitud para confirmarla (`CONFIRMED`) o cancelarla (`CANCELLED`) su estado cambia al estado solicitado (`CONFIRMED/CANCELLED`)
+- **CA-08:** Dada una reserva en estado `CANCELLED`, al intentar confirmarla (Actualizarla a CONFIRMED),  entonces recibo **400 Bad Request** o **422 Unprocessable Entity**
+- **CA-09:** Dada una reserva `CONFIRMED` para la mesa con `id = 05`, Turno 9:00 - 9:59, Fecha 2025-11-15, al reprogramar para Turno 8:00 - 8:59, Fecha 2025-11-15 (Con Turno disponible = True), la reserva se actualiza correctamente.
+- **CA-10:** Dada una reserva `CONFIRMED` para la mesa  `Mesa M-01`, Turno 11:00 - 11:59, Fecha 2025-11-15, al reprogramar otra reserva (O a si misma) para los mismos valores, entonces recibo **409 Conclict** y la reprogramacion no se realiza. 
+- **CA-11:** Dada una resreva para 4 comensales para la mesa `Mesa M-03` con Capacidad de 5 personas, cuando intento cambiar a la mesa `Mesa M-06` con Capacidad para 3 personas, entonces recibo **400 Bad Request** por capacidad insuficiente.
+- **CA-12:** Dada una reserva en estado `CREATED` para `reservaId = 124`, al solicitar su eliminacion, entonces la reserva se elimina exitosamente.
+- **CA-13:** Dada una reserva en estado `CONFIRMED` para `reservaId = 574`, cuando solicito su eliminacion, entonces recibo **409 Conflict** o **422 Unprocessable Entity** y está no se elimina.
+- **CA-14:** Dado que la mesa con  `Mesa M-01` existe, al intentar crear otra mesa con el mismo código, entonces recibo **409 Conflict** y la nueva mesa no se crea.
+- **CA-15:** Dada la mesa `Mesa M-16` con capacidad 5 y con una reserva activa para 5 comensales, cuando intento modificar la capacidad de `M-16` a 4, recibo **409 Conflict** y la capacidad no cambia.
+- **CA-16:** Dada la mesa `Mesa M-19` con capacidad 3 y su reserva activa maxima de 3 comensales, cuando intento modificar la capacidad de `M-19`a 4, entonces la capacidad se actualiza.
+- **CA-17:** Dada la mesa `Mesa M-81` al no tener reservas activas, cuando se solicita su eliminacion, entonces la mesa es eliminada con exito. De lo contrario recibo **409 Conflict** y la mesa no se elimina.
+- **CA-18:** Dado el `Cliente C-154` ya registrado con `télefono: 8457-5132`, al intentar crear un nuevo `Cliente C-155` con el mismo télefono, recibo **409 Conflict** y el nuevo cliente no se registra.
+- **CA-19:** Dado el `Cliente C-54` con `télefono: 5216-5421`, al intentar actualizar el telefono a un valor ya utilizado por con `C-71` entonces recibo **409 Conflict** y el télefono de `C-54` no cambia.
+- **CA-20:** Dado el `Cliente C-62` que tiene una reserva activa (`CONFIRMED`), cuando intento eliminarlo, recibo **409 Conflict** y el cliente no es eliminado.
+- **CA-21:** Dado el `Cliente C-73` que tiene solo reservas historicas (`COMPLETED`), al solicitar su desactivacion, entonces la operacion se realiza con exito.
+- **CA-22:** Dado que un turno llamado "Tarde" no existe, al crear un turno con `nombre:Tarde, horaInicio: 14:00, horaFin: 18:00`, entonces el turno se crea con exito.
+- **CA-23:** Dado que `Turno Almuerzo` existe (`12:00 - 14:00`) cuando intento crear un nuevo turno con `nombre: Almuerzo, horaInicio: 12:00`, entonces recibo **409 Conflict** por nombre duplicado.
+- **CA-24:** Cuando intento crear un turno con `horaInicio: 20:00, horaFin: 19:00`, entonces recibo **400 Bad Request** por rango horario inválido.
+- **CA-25:** Dado `Turno X` (`17:00 - 19:00`), cuanto intenro crear `Turno Y` (`18:00 - 20:00`), que solapa al existente, entonces recibo **409 Conflict** por solapamiento de horarios y el turno no se crea.
+- **CA-26:** Dado el `Turno Cena`(`19:00 - 23:00`), cuando lo actualizo a `horaFin: 22:00` (manteniendo un rango valido), entonces se actualiza con exito.
+- **CA-27:**  Dado el `Turno Cena`(`19:00 - 23:00`) y el `Turno Noche`(`23:00 - 01:00`), cuando actualizo `Turno Cena` a `horaFin: 23:30`, entonces recibo **409 Conflict** (Por solapamiento) y la actualizacion no se realiza.
+- **CA-28:** Dado un `Turno Noche` que no tiene reservas activas o futuras que lo referencien, cuando se solicita su eliminacion, entonces la operacion sucede con exito.
+- **CA-29:** Dado un `Turno Noche` inexistente, cuando el usuario intenta crear una reserva para ese turno, entonces la operacion es rechazada y recibo **404 Not Found** o **409 Conflict**.
+- **CA-30:** Dada la lista completa de turnos (activos e inactivos), cuando listo los turnos con el filtro agrupar por `horaInicio = desc`, recibo la lista de turnos de forma descendente.
 
 ---
 
