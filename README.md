@@ -46,31 +46,33 @@ Documentar el **diseño funcional y de datos** del sistema:
 
 ---
 
-## Reglas de Negocio para reserva
-- **RN-01** Una mesa **no puede** tener **más de una reserva activa** (estados `CREATED`/`CONFIRMED`) para la **misma fecha** y **mismo turno**.
+## Reglas de Negocio
+
+### Reservas
+- **RN-01** Una mesa **no puede** tener **más de una reserva activa** (`CREATED`/`CONFIRMED`) para la **misma fecha** y **mismo turno**.
 - **RN-02** `comensales ≤ capacidad` de la mesa.
 - **RN-03** No se aceptan reservas con **fecha en el pasado**.
 - **RN-04** Deben existir **cliente, mesa y turno**.
 - **RN-05** Estados: `CREATED`, `CONFIRMED`, `CANCELLED`, `NO_SHOW`, `COMPLETED`.
-- **RN-06** Solo `CREATED` o `CONFIRMED` cuentan como activas para la validación de choques.
+- **RN-06** Solo `CREATED` o `CONFIRMED` cuentan como **activas** para la validación de choques.
 
-## Reglas de Negocio para Mesas
-- **M-01**: Cada mesa debe tener un identificador único (`mesaId`).
-- **M-02**: La capacidad mínima es 1 y debe ser un número entero positivo.
-- **M-03**: Una mesa no puede cambiar de capacidad si tiene reservas activas (para no invalidar las existentes).
-- **M-04**: Una mesa puede estar disponible en múltiples turnos y fechas, salvo cuando tenga reservas activas.
+### Mesas
+- **RN-07** Cada mesa debe tener un **identificador único** (`mesaId`).
+- **RN-08** La **capacidad mínima es 1** y debe ser un **número entero positivo**.
+- **RN-09** Una mesa **no puede cambiar su capacidad** si tiene reservas **activas** (para no invalidar las existentes).
+- **RN-10** Una mesa puede estar **disponible en múltiples turnos y fechas**, salvo cuando tenga reservas activas.
 
+### Clientes
+- **RN-11** Cada cliente debe tener un **identificador único** (`clienteId`).
+- **RN-12** El cliente debe registrar como mínimo: **nombre y teléfono** (`email` opcional).
+- **RN-13** Un cliente puede tener **múltiples reservas** en distintas mesas, fechas o turnos.
 
-## Reglas de Negocio para Clientes
-- **C-01**: Cada cliente debe tener un identificador único (`clienteId`).
-- **C-02**: El cliente debe registrar como mínimo: nombre y teléfono (email opcional).
-- **C-04**: Un cliente puede tener múltiples reservas en distintas mesas, fechas o turnos.
+### Turnos
+- **RN-14** Cada turno debe tener un **identificador único** (`turnoId`).
+- **RN-15** Un turno debe tener **nombre** (ejemplo: `"turno 1"`) y un **rango horario válido** (ejemplo: `08:00 – 08:59`).
+- **RN-16** No se permiten turnos que se **solapen en horario** (ejemplo: `12:00 – 15:00` y `14:00 – 16:00`).
+- **RN-17** Solo se puede reservar en **turnos definidos previamente**.
 
-## Reglas de Negocio para Turnos
-- **T-01**: Cada turno debe tener un identificador único (`turnoId`).
-- **T-02**: Un turno debe tener nombre (ej: "turno 1") y un rango horario válido                           (eje : 8:00 < 8:59).
-- **T-03**: No se permiten turnos que se solapen en horario (ejemplo: Almuerzo 12:00–15:00 y Brunch 14:00–16:00).
-- **T-05**: Solo se puede reservar en turnos definidos previamente.
 
 ---
 
