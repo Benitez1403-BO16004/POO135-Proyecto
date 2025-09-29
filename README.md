@@ -54,6 +54,24 @@ Documentar el **diseño funcional y de datos** del sistema:
 - **RN-05** Estados: `CREATED`, `CONFIRMED`, `CANCELLED`, `NO_SHOW`, `COMPLETED`.
 - **RN-06** Solo `CREATED` o `CONFIRMED` cuentan como activas para la validación de choques.
 
+## Reglas de Negocio para Mesas
+**M-01**: Cada mesa debe tener un identificador único (`mesaId`).
+**M-02**: La capacidad mínima es 1 y debe ser un número entero positivo.
+**M-03**: Una mesa no puede cambiar de capacidad si tiene reservas activas (para no invalidar las existentes).
+**M-04**: Una mesa puede estar disponible en múltiples turnos y fechas, salvo cuando tenga reservas activas.
+
+
+## Reglas de Negocio para Clientes
+**C-01**: Cada cliente debe tener un identificador único (`clienteId`).
+**C-02**: El cliente debe registrar como mínimo: nombre y teléfono (email opcional).
+**C-04**: Un cliente puede tener múltiples reservas en distintas mesas, fechas o turnos.
+
+## Reglas de Negocio para Turnos
+**T-01**: Cada turno debe tener un identificador único (`turnoId`).
+**T-02**: Un turno debe tener nombre (ej: "turno 1") y un rango horario válido                           (eje : 8:00 < 8:59).
+**T-03**: No se permiten turnos que se solapen en horario (ejemplo: Almuerzo 12:00–15:00 y Brunch 14:00–16:00).
+**T-05**: Solo se puede reservar en turnos definidos previamente.
+
 ---
 
 ## Modelo de Dominio (UML)
