@@ -46,7 +46,7 @@ Documentar el **diseño funcional y de datos** del sistema:
 
 ---
 
-## Reglas de Negocio
+## Reglas de Negocio para reserva
 - **RN-01** Una mesa **no puede** tener **más de una reserva activa** (estados `CREATED`/`CONFIRMED`) para la **misma fecha** y **mismo turno**.
 - **RN-02** `comensales ≤ capacidad` de la mesa.
 - **RN-03** No se aceptan reservas con **fecha en el pasado**.
