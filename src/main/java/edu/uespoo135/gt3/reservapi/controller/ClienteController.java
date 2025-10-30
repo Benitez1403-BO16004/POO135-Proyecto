@@ -27,4 +27,16 @@ public class ClienteController {
     public ResponseEntity<List<ClienteDTO>> listarClientes() {
         return ResponseEntity.ok(clienteService.listarClientes());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id,
+                                                        @RequestBody ClienteDTO clienteDTO) {
+        return ResponseEntity.ok(clienteService.actualizarCliente(id, clienteDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
+        clienteService.eliminarCliente(id);
+        return ResponseEntity.noContent().build();
+    }
 }
