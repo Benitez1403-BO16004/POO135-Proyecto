@@ -30,4 +30,23 @@ public class ClienteService {
                 .map(ClienteMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public ClienteDTO actualizarCliente(Long id, ClienteDTO clienteDTO) {
+        Cliente existente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
+
+        existente.setNombre(clienteDTO.getNombre());
+        existente.setEmail(clienteDTO.getEmail());
+        existente.setTelefono(clienteDTO.getTelefono());
+
+        Cliente actualizado = clienteRepository.save(existente);
+        return ClienteMapper.toDTO(actualizado);
+    }
+
+    public void eliminarCliente(Long id) {
+        if (!clienteRepository.existsById(id)) {
+            throw new RuntimeException("Cliente no encontrado con ID: " + id);
+        }
+        clienteRepository.deleteById(id);
+    }
 }

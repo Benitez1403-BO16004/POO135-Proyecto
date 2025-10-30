@@ -27,4 +27,16 @@ public class MesaController {
     public ResponseEntity<List<MesaDTO>> listarMesas() {
         return ResponseEntity.ok(mesaService.listarMesas());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MesaDTO> actualizarCliente(@PathVariable Long id,
+                                                        @RequestBody MesaDTO mesaDTO) {
+        return ResponseEntity.ok(mesaService.actualizarMesa(id, mesaDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
+        mesaService.eliminarMesa(id);
+        return ResponseEntity.noContent().build();
+    }
 }
