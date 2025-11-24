@@ -298,8 +298,124 @@ CREATE UNIQUE INDEX ux_reserva_activa
 - **CA-29:** Dado un `Turno Noche` inexistente, cuando el usuario intenta crear una reserva para ese turno, entonces la operacion es rechazada y recibo **404 Not Found** o **409 Conflict**.
 - **CA-30:** Dada la lista completa de turnos (activos e inactivos), cuando listo los turnos con el filtro agrupar por `horaInicio = desc`, recibo la lista de turnos de forma descendente.
 
+
+## 🚀 Guía de Implementación y Despliegue (Fase 2 y 3)
+
+Esta sección documenta los requisitos técnicos para la ejecución y validación del proyecto, cumpliendo con los criterios de la entrega final.
+
+### ⚙️ Requisitos del Entorno
+- **Java:** JDK 17 o superior.
+- **Base de Datos:** PostgreSQL (Puerto `5432`).
+- **Gestión de Dependencias:** Maven Wrapper (incluido en el proyecto).
+
+### 📥 Instalación y Ejecución
+
+**1. Preparación de la Base de Datos**
+El proyecto conecta a una base de datos local. Ejecuta el siguiente script en tu cliente PostgreSQL (PgAdmin o terminal):
+```sql
+CREATE DATABASE prueba_api;
+```
+*(Nota: La configuración por defecto utiliza usuario `marlon` y contraseña `202212`. Para cambiarlo, edite `src/main/resources/application.properties`).*
+
+**2. Compilación y Ejecución de la API**
+Desde la terminal en la raíz del proyecto:
+
+* **En Windows (PowerShell/CMD):**
+    ```powershell
+    ./mvnw.cmd spring-boot:run
+    ```
+* **En Linux / Mac:**
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+Una vez iniciado, el servicio estará disponible en: `http://localhost:8080`.
+
+**3. Ejecución de Pruebas Unitarias (JUnit)**
+Para validar la lógica de negocio y la robustez del código:
+```bash
+./mvnw test
+```
+
 ---
 
-## Próximas entregas (placeholder)
-- **Entrega 2 (Implementación):** Spring Boot + JPA + Flyway + controladores + validaciones + Postman.  
-- **Entrega 3 (Pruebas y robustez):** Manejo de errores global, tests JUnit/WebMvcTest, documentación final.
+## 📡 Documentación de Endpoints (Ejemplos JSON)
+
+A continuación se detallan los payloads necesarios para probar la funcionalidad completa en **Postman**.
+
+### 👤 Gestión de Clientes
+**Registrar Nuevo Cliente**
+- **Método:** `POST`
+- **URL:** `http://localhost:8080/api/clientes`
+```json
+{
+  "nombre": "Juan Pérez",
+  "email": "juan.perez@ejemplo.com",
+  "telefono": "7070-1234"
+}
+```
+
+### 🍽️ Gestión de Mesas
+**Registrar Nueva Mesa**
+- **Método:** `POST`
+- **URL:** `http://localhost:8080/api/mesas`
+```json
+{
+  "codigo": "M-05",
+  "capacidad": 4,
+  "ubicacion": "Terraza - Vista Jardin"
+}
+```
+
+### ⏰ Gestión de Turnos
+**Registrar Turno Operativo**
+- **Método:** `POST`
+- **URL:** `http://localhost:8080/api/turnos`
+```json
+{
+  "nombre": "Cena Turno 1",
+  "horaInicio": "18:00",
+  "horaFin": "19:59"
+}
+```
+
+### 📅 Gestión de Reservas (Core del Negocio)
+
+**1. Crear Reserva (Estado Inicial: CREATED)**
+Valida disponibilidad de mesa y capacidad (RN-01, RN-02).
+- **Método:** `POST`
+- **URL:** `http://localhost:8080/api/reservas`
+```json
+{
+  "fecha": "2025-12-01",
+  "clienteId": 1,
+  "mesaId": 1,
+  "turnoId": 1,
+  "comensales": 4
+}
+```
+
+**2. Confirmar Reserva**
+Transición de estado: `CREATED` -> `CONFIRMED`.
+- **Método:** `POST`
+- **URL:** `http://localhost:8080/api/reservas/{id}/confirmar`
+- **Body:** *(Vacío)*
+
+**3. Cancelar Reserva**
+Transición de estado: `CREATED/CONFIRMED` -> `CANCELLED`.
+- **Método:** `POST`
+- **URL:** `http://localhost:8080/api/reservas/{id}/cancelar`
+- **Body:** *(Vacío)*
+
+---
+
+### 🛡️ Manejo de Errores y Códigos de Estado
+La API implementa un manejo de excepciones para garantizar respuestas consistentes:
+
+| Código HTTP | Significado | Causa Común |
+|---|---|---|
+| **200 OK / 201 Created** | Éxito | Operación realizada correctamente. |
+| **400 Bad Request** | Error de Validación | Datos incorrectos, fecha en pasado, capacidad excedida. |
+| **404 Not Found** | No Encontrado | ID de Cliente, Mesa o Turno no existe en BD. |
+| **409 Conflict** | Conflicto de Negocio | La mesa ya está reservada en ese horario (Solapamiento). |
+| **500 Internal Server Error** | Error Crítico | Fallo inesperado del servidor. |
