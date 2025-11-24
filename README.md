@@ -315,7 +315,7 @@ El proyecto conecta a una base de datos local. Ejecuta el siguiente script en tu
 ```sql
 CREATE DATABASE prueba_api;
 ```
-*(Nota: La configuración por defecto utiliza usuario `marlon` y contraseña `202212`. Para cambiarlo, edite `src/main/resources/application.properties`).*
+*(Nota: Editar configuración para la conexión a base de datos, editar `spring.datasource.url`, `spring.datasource.username` y `spring.datasource.username.password` `src/main/resources/application.properties`) con los correspondientes de la base de datos.*
 
 **2. Compilación y Ejecución de la API**
 Desde la terminal en la raíz del proyecto:
