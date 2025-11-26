@@ -25,7 +25,9 @@ Integrantes
 - [Modelo de Dominio (UML)](#modelo-de-dominio-uml)
 - [Modelo ER (PostgreSQL)](#modelo-er-postgresql)
 - [Casos de Uso + Criterios de Aceptación](#casos-de-uso--criterios-de-aceptación)
-- [Próximas entregas (placeholder)](#próximas-entregas-placeholder)
+- [Guía de Implementación y Despliegue](#guía-de-implementación-y-despliegue-fase-2-y-3)
+- [Documentación ENDPOINTS CRUD](#documentación-de-endpoints-ejemplos-json)
+- [Manejo de Errores y Códigos de Estado](#manejo-de-errores-y-códigos-de-estado)
 
 ---
 
@@ -299,7 +301,7 @@ CREATE UNIQUE INDEX ux_reserva_activa
 - **CA-30:** Dada la lista completa de turnos (activos e inactivos), cuando listo los turnos con el filtro agrupar por `horaInicio = desc`, recibo la lista de turnos de forma descendente.
 
 
-## 🚀 Guía de Implementación y Despliegue (Fase 2 y 3)
+## Guía de Implementación y Despliegue (Fase 2 y 3)
 
 Esta sección documenta los requisitos técnicos para la ejecución y validación del proyecto, cumpliendo con los criterios de la entrega final.
 
@@ -315,10 +317,11 @@ El proyecto conecta a una base de datos local. Ejecuta el siguiente script en tu
 ```sql
 CREATE DATABASE prueba_api;
 ```
-*(Nota: Editar configuración para la conexión a base de datos, editar `spring.datasource.url`, `spring.datasource.username` y `spring.datasource.username.password` `src/main/resources/application.properties`) con los correspondientes de la base de datos.*
+*(Nota: Editar configuración para la conexión a base de datos, editar `spring.datasource.url`, `spring.datasource.username` y `spring.datasource.username.password` en `src/main/resources/application.properties` con los correspondientes de la base de datos.*
 
 **2. Compilación y Ejecución de la API**
-Desde la terminal en la raíz del proyecto:
+1. Correr el `ApiReservacionesApplication.java` en `src\main\java\edu\uespoo135\gt3\reservapi\` desde el IDE.  
+2. Desde la terminal en la raíz del proyecto:
 
 * **En Windows (PowerShell/CMD):**
     ```powershell
@@ -339,7 +342,7 @@ Para validar la lógica de negocio y la robustez del código:
 
 ---
 
-## 📡 Documentación de Endpoints (Ejemplos JSON)
+## Documentación de Endpoints (Ejemplos JSON)
 
 A continuación se detallan los payloads necesarios para probar la funcionalidad completa en **Postman**.
 
@@ -409,7 +412,7 @@ Transición de estado: `CREATED/CONFIRMED` -> `CANCELLED`.
 
 ---
 
-### 🛡️ Manejo de Errores y Códigos de Estado
+### Manejo de Errores y Códigos de Estado
 La API implementa un manejo de excepciones para garantizar respuestas consistentes:
 
 | Código HTTP | Significado | Causa Común |
