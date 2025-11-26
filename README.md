@@ -26,6 +26,8 @@ Integrantes
 - [Modelo ER (PostgreSQL)](#modelo-er-postgresql)
 - [Casos de Uso + Criterios de Aceptación](#casos-de-uso--criterios-de-aceptación)
 - [Próximas entregas (placeholder)](#próximas-entregas-placeholder)
+- 
+- [Documentación ENDPOINTS CRUD](#documentación-de-endpoints-ejemplos-json)
 
 ---
 
@@ -340,7 +342,7 @@ Para validar la lógica de negocio y la robustez del código:
 
 ---
 
-## 📡 Documentación de Endpoints (Ejemplos JSON)
+## Documentación de Endpoints (Ejemplos JSON)
 
 A continuación se detallan los payloads necesarios para probar la funcionalidad completa en **Postman**.
 
@@ -410,7 +412,7 @@ Transición de estado: `CREATED/CONFIRMED` -> `CANCELLED`.
 
 ---
 
-### 🛡️ Manejo de Errores y Códigos de Estado
+### Manejo de Errores y Códigos de Estado
 La API implementa un manejo de excepciones para garantizar respuestas consistentes:
 
 | Código HTTP | Significado | Causa Común |
