@@ -315,10 +315,11 @@ El proyecto conecta a una base de datos local. Ejecuta el siguiente script en tu
 ```sql
 CREATE DATABASE prueba_api;
 ```
-*(Nota: Editar configuración para la conexión a base de datos, editar `spring.datasource.url`, `spring.datasource.username` y `spring.datasource.username.password` `src/main/resources/application.properties`) con los correspondientes de la base de datos.*
+*(Nota: Editar configuración para la conexión a base de datos, editar `spring.datasource.url`, `spring.datasource.username` y `spring.datasource.username.password` en `src/main/resources/application.properties` con los correspondientes de la base de datos.*
 
 **2. Compilación y Ejecución de la API**
-Desde la terminal en la raíz del proyecto:
+1. Correr el `ApiReservacionesApplication.java` en `src\main\java\edu\uespoo135\gt3\reservapi\` desde el IDE.  
+2. Desde la terminal en la raíz del proyecto:
 
 * **En Windows (PowerShell/CMD):**
     ```powershell
