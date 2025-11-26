@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "3e5f07a7-a148-432d-ae07-e731830b12e2",
+		"name": "Reservapi - Local Test POST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49807849"
+	},
+	"item": [
+		{
+			"name": "POST - CLIENTES",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"email\": \"juan.perez@ejemplo.com\",\r\n  \"telefono\": \"5551234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - MESAS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"codigo\": \"E1\",\r\n  \"capacidad\": 3,\r\n  \"ubicacion\": \"Interior\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/mesas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - TURNOS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Almuerzo\",\r\n  \"horaInicio\": \"11:00:00\",\r\n  \"horaFin\": \"12:00:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/turnos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"turnos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - RESERVAS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fecha\": \"2025-11-26\",\r\n  \"clienteId\": 2,\r\n  \"mesaId\": 3,\r\n  \"turnoId\": 2,\r\n  \"comensales\": 2,\r\n  \"estado\": \"CREATED\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - CONFIRMAR RESERVA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fecha\": \"2025-12-25\",\r\n  \"clienteId\": 1,\r\n  \"mesaId\": 5,\r\n  \"turnoId\": 1,\r\n  \"comensales\": 3,\r\n  \"estado\": \"CREATED\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservas/9/confirmar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservas",
+						"9",
+						"confirmar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - CANCELAR RESERVA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Post-response test: ensure success and log detailed info on failure",
+							"pm.test('status is 2xx', function () {",
+							"    var status = pm.response.code;",
+							"    pm.test('Status code is 2xx', function () {",
+							"        pm.expect(status).to.be.within(200, 299, 'Expected 2xx status code');",
+							"    });",
+							"});",
+							"",
+							"if (pm.response.code >= 500) {",
+							"    console.error('Server error on confirm reserva:', pm.response.text());",
+							"    pm.environment.set('last_server_error', pm.response.text());",
+							"}",
+							"",
+							"// Helpful debug: expose response JSON fields if present",
+							"try {",
+							"    var body = pm.response.json();",
+							"    console.log('response body', body);",
+							"} catch (e) {",
+							"    console.log('non-JSON response or empty body');",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservas/1/confirmar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservas",
+						"1",
+						"confirmar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

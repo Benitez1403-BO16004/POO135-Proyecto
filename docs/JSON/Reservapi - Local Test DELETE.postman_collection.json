@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "2a468bb9-6869-4cad-97c8-c5bc5b2b59c0",
+		"name": "Reservapi - Local Test DELETE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49807849"
+	},
+	"item": [
+		{
+			"name": "DELETE - CLIENTES",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http:localhost/api/clientes/{id}",
+					"host": [
+						"http"
+					],
+					"port": "localhost",
+					"path": [
+						"api",
+						"clientes",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - MESAS",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/mesas/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mesas",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - TURNOS",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/turnos/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"turnos",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - RESERVAS",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservas/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservas",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "96ed0692-7999-4b4b-8f6b-a7a0c9326eb0",
+		"name": "Reservapi - Local Test PUT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49807849"
+	},
+	"item": [
+		{
+			"name": "PUT - CLIENTES",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"email\": \"juanpez@ejemplo.com\",\r\n  \"telefono\": \"5551234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/clientes/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"clientes",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - MESAS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"codigo\": \"T1\",\r\n    \"capacidad\": 4,\r\n    \"ubicacion\": \"Terraza\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/mesas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mesas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - TURNOS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": 1,\r\n        \"nombre\": \"Desayuno 1\",\r\n        \"horaInicio\": \"08:00:00\",\r\n        \"horaFin\": \"10:00:00\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/turnos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"turnos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - RESERVAS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": 2,\r\n        \"fecha\": \"2025-12-25\",\r\n        \"clienteId\": 1,\r\n        \"mesaId\": 5,\r\n        \"turnoId\": 1,\r\n        \"comensales\": 3,\r\n        \"estado\": \"CONFIRMED\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservas/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
