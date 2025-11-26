@@ -25,9 +25,9 @@ Integrantes
 - [Modelo de Dominio (UML)](#modelo-de-dominio-uml)
 - [Modelo ER (PostgreSQL)](#modelo-er-postgresql)
 - [Casos de Uso + Criterios de Aceptación](#casos-de-uso--criterios-de-aceptación)
-- [Próximas entregas (placeholder)](#próximas-entregas-placeholder)
-- 
+- [Guía de Implementación y Despliegue](#guía-de-implementación-y-despliegue-fase-2-y-3)
 - [Documentación ENDPOINTS CRUD](#documentación-de-endpoints-ejemplos-json)
+- [Manejo de Errores y Códigos de Estado](#manejo-de-errores-y-códigos-de-estado)
 
 ---
 
@@ -301,7 +301,7 @@ CREATE UNIQUE INDEX ux_reserva_activa
 - **CA-30:** Dada la lista completa de turnos (activos e inactivos), cuando listo los turnos con el filtro agrupar por `horaInicio = desc`, recibo la lista de turnos de forma descendente.
 
 
-## 🚀 Guía de Implementación y Despliegue (Fase 2 y 3)
+## Guía de Implementación y Despliegue (Fase 2 y 3)
 
 Esta sección documenta los requisitos técnicos para la ejecución y validación del proyecto, cumpliendo con los criterios de la entrega final.
 
