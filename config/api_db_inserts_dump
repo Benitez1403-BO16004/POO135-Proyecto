@@ -1,0 +1,123 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict z6CohwFQWkdHB0R9vzdub4rx2qdXm6AgQ6dlStqvB3n38N5h4ZzqMOaTkNXFqaL
+
+-- Dumped from database version 17.6
+-- Dumped by pg_dump version 17.6
+
+-- Started on 2025-11-25 21:39:26
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4916 (class 0 OID 16505)
+-- Dependencies: 219
+-- Data for Name: clientes; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.clientes VALUES (1, 'Ana López', 'ana@ejemplo.com', '77778888');
+INSERT INTO public.clientes VALUES (4, 'Juan Pérez', 'juanpez@ejemplo.com', '65487895');
+INSERT INTO public.clientes VALUES (2, 'Luis Gómez', 'luis@ejemplo.com', '33654578');
+INSERT INTO public.clientes VALUES (3, 'Sara Menjivar', 'saramen@ejemplo.com', '65498745');
+INSERT INTO public.clientes VALUES (5, 'Carlos Núñez', 'carnun@ejemplo.com', '78453245');
+INSERT INTO public.clientes VALUES (6, 'Marlon Núñez', 'marlonnun@ejemplo.com', '12343214');
+
+
+--
+-- TOC entry 4918 (class 0 OID 16516)
+-- Dependencies: 221
+-- Data for Name: mesas; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.mesas VALUES (1, 'M-T1', 4, 'Terraza');
+INSERT INTO public.mesas VALUES (2, 'M-I2', 2, 'Interior');
+INSERT INTO public.mesas VALUES (5, 'M-E1', 3, 'Exterior');
+INSERT INTO public.mesas VALUES (3, 'M-T2', 3, 'Terraza');
+INSERT INTO public.mesas VALUES (4, 'M-E2', 2, 'Exterior');
+INSERT INTO public.mesas VALUES (6, 'M-T3', 4, 'Terraza');
+
+
+--
+-- TOC entry 4920 (class 0 OID 16526)
+-- Dependencies: 223
+-- Data for Name: turnos; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.turnos VALUES (2, 'Tarde 2', '18:00:00', '20:00:00');
+INSERT INTO public.turnos VALUES (1, 'Desayuno 1', '08:00:00', '09:00:00');
+INSERT INTO public.turnos VALUES (4, 'Almuerzo 1', '11:00:00', '12:00:00');
+INSERT INTO public.turnos VALUES (3, 'Tarde 1', '13:00:00', '15:00:00');
+INSERT INTO public.turnos VALUES (5, 'Desayuno 2', '07:00:00', '08:00:00');
+INSERT INTO public.turnos VALUES (6, 'Cena 1', '16:00:00', '18:00:00');
+
+
+--
+-- TOC entry 4922 (class 0 OID 16536)
+-- Dependencies: 225
+-- Data for Name: reservas; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.reservas VALUES (1, 1, 1, 1, '2025-10-15', 4, 'CREATED', NULL, '2025-10-14 20:10:40.91571-06', '2025-10-14 20:10:40.91571-06');
+INSERT INTO public.reservas VALUES (5, 3, 2, 3, '2025-11-28', 2, 'CREATED', NULL, '2025-11-25 17:55:16.810914-06', '2025-11-25 18:03:19.557981-06');
+INSERT INTO public.reservas VALUES (8, 5, 4, 5, '2025-11-30', 2, 'CREATED', NULL, '2025-11-25 17:56:15.81065-06', '2025-11-25 18:03:19.557981-06');
+INSERT INTO public.reservas VALUES (9, 2, 3, 2, '2025-11-25', 2, 'NO_SHOW', 'No se presentó', '2025-11-25 17:57:13.201936-06', '2025-11-25 20:03:58.271123-06');
+INSERT INTO public.reservas VALUES (2, 1, 5, 1, '2025-11-25', 3, 'CANCELLED', 'Canceló por motivos personales', '2025-11-12 21:14:59.88596-06', '2025-11-25 20:04:38.969379-06');
+INSERT INTO public.reservas VALUES (11, 6, 6, 6, '2025-11-26', 4, 'CANCELLED', NULL, '2025-11-25 20:39:39.747874-06', '2025-11-25 20:43:08.801972-06');
+
+
+--
+-- TOC entry 4928 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: clientes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.clientes_id_seq', 6, true);
+
+
+--
+-- TOC entry 4929 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: mesas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.mesas_id_seq', 6, true);
+
+
+--
+-- TOC entry 4930 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: reservas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.reservas_id_seq', 11, true);
+
+
+--
+-- TOC entry 4931 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: turnos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.turnos_id_seq', 6, true);
+
+
+-- Completed on 2025-11-25 21:39:26
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict z6CohwFQWkdHB0R9vzdub4rx2qdXm6AgQ6dlStqvB3n38N5h4ZzqMOaTkNXFqaL
+
